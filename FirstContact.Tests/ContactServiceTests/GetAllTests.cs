@@ -9,13 +9,10 @@ public class GetAllTests
     {
         var substituteRepo = Substitute.For<IContactRepository>();
         substituteRepo.GetAll().Returns(x =>
-        {
-            List<Contact> contacts = [
-                 new Contact("Markske") { Id = 1},
+            [
+                new Contact("Markske") { Id = 1},
                 new Contact("Xavier") { Id = 2},
-                ];
-            return contacts;
-        });
+            ]);
 
         var contactService = new ContactService(substituteRepo);
         var result = contactService.GetAll();
@@ -33,10 +30,7 @@ public class GetAllTests
     public void GetAll_Returns_Empty_List_When_No_Data()
     {
         var substituteRepo = Substitute.For<IContactRepository>();
-        substituteRepo.GetAll().Returns(x =>
-        {
-            return [];
-        });
+        substituteRepo.GetAll().Returns(x => []);
 
         var contactService = new ContactService(substituteRepo);
         var result = contactService.GetAll();

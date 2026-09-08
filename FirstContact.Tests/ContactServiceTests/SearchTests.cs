@@ -8,16 +8,12 @@ public class SearchTests
     public void Search_Call_Returns_List_Of_Contacts()
     {
         var substituteRepo = Substitute.For<IContactRepository>();
-        substituteRepo.Search(Arg.Any<string>())
-            .ReturnsForAnyArgs(x =>
-        {
-            Assert.Equal("Mark", x[0]);
-            List<Contact> contacts = [
+        substituteRepo.Search("Mark")
+            .Returns(x =>
+            [
                 new Contact("Markske Vertongen") { Id = 1},
                 new Contact("Mark Dinges") { Id = 3},
-                ];
-            return contacts;
-        });
+            ]);
 
         var contactService = new ContactService(substituteRepo);
         var result = contactService.Search("Mark");
@@ -35,12 +31,8 @@ public class SearchTests
     public void Search_Call_Returns_Empty_List_For_No_Match()
     {
         var substituteRepo = Substitute.For<IContactRepository>();
-        substituteRepo.Search(Arg.Any<string>())
-            .ReturnsForAnyArgs(x =>
-        {
-            Assert.Equal("Mark", x[0]);
-            return [];
-        });
+        substituteRepo.Search("Mark")
+            .Returns(x => []);
 
         var contactService = new ContactService(substituteRepo);
         var result = contactService.Search("Mark");
