@@ -37,6 +37,7 @@ public class SearchTests
         var contactService = new ContactService(substituteRepo);
         var result = contactService.Search("Mark");
 
+        // MME: Assert the exact search term with Arg.Is
         substituteRepo.Received().Search(Arg.Any<string>());
 
         Assert.Empty(result);
