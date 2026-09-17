@@ -36,7 +36,7 @@ public class UpdateContactTests
             new UpdateContactRequest { Name = "Xavier Waterslagers" });
 
         substituteRepo.DidNotReceive().Commit();
-
+        // MME: Assert GetById(1) was called
         Assert.False(result);
     }
 }
